@@ -1,3 +1,21 @@
+from PIL import Image
+logo = Image.open("logo.png")
+st.image(logo, width=200)  # você pode ajustar o tamanho
+
+st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+st.image(logo, width=200)
+st.markdown("</div>", unsafe_allow_html=True)
+
+st.markdown("<h1 style='text-align: center; color: navy;'>Consultoria Financeira XYZ</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: gray;'>Planeje hoje. Conquiste amanhã.</h4>", unsafe_allow_html=True)
+
+
+primaryColor="#0E6BA8"
+backgroundColor="#F8F9FA"
+secondaryBackgroundColor="#E9ECEF"
+textColor="#000000"
+font="sans serif"
+
 import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
