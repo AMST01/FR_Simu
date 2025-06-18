@@ -9,13 +9,13 @@ from io import BytesIO, StringIO
 from xhtml2pdf import pisa
 
 # --- CONFIGURAÇÃO DA PÁGINA ---
-st.set_page_config(page_title="Calculadora de Juros Compostos", layout="wide")
+st.set_page_config(page_title="Simulador Juros Compostos", layout="wide")
 
 # --- LOGO E TÍTULOS ---
 logo = Image.open("logo.png")
 st.image(logo, width=200)
 
-st.markdown("<h1 style='text-align: center; color: navy;'>Consultoria Financeira XYZ</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: navy;'>Francamente Ricas</h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center; color: gray;'>Planeje hoje. Conquiste amanhã.</h4>", unsafe_allow_html=True)
 
 # --- SIDEBAR - PARÂMETROS ---
@@ -106,15 +106,15 @@ def salvar_email(email):
 
 # --- SEÇÃO DE COLETA DE EMAIL E LIBERAÇÃO DE DOWNLOADS ---
 
-st.subheader("Para liberar os downloads, informe seu e-mail:")
+st.subheader("Informe seu e-mail para ter acesso ao material completo")
 
 email = st.text_input("Digite seu e-mail:")
 
 if email and email_valido(email):
-    if st.button("Enviar e-mail e liberar downloads"):
+    if st.button("Material completo"):
         sucesso = salvar_email(email)
         if sucesso:
-            st.success("E-mail salvo com sucesso! Downloads liberados abaixo.")
+            st.success("Downloads liberados abaixo.")
 
             # Botões de download liberados só após salvar o email
 
