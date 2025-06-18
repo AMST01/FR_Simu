@@ -1,26 +1,27 @@
-from PIL import Image
-logo = Image.open("logo.png")
-st.image(logo, width=200)  # você pode ajustar o tamanho
-
-st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-st.image(logo, width=200)
-st.markdown("</div>", unsafe_allow_html=True)
-
-st.markdown("<h1 style='text-align: center; color: navy;'>Consultoria Financeira XYZ</h1>", unsafe_allow_html=True)
-st.markdown("<h4 style='text-align: center; color: gray;'>Planeje hoje. Conquiste amanhã.</h4>", unsafe_allow_html=True)
-
-
-primaryColor="#0E6BA8"
-backgroundColor="#F8F9FA"
-secondaryBackgroundColor="#E9ECEF"
-textColor="#000000"
-font="sans serif"
-
 import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
+from PIL import Image
+import os
 
+# Configuração da página
 st.set_page_config(page_title="Calculadora de Juros Compostos", layout="wide")
+
+# Mostrar logo e título da consultoria
+col_logo, col_titulo = st.columns([1, 4])
+
+with col_logo:
+    if os.path.exists("logo.png"):
+        logo = Image.open("logo.png")
+        st.image(logo, width=120)
+    else:
+        st.write("")
+
+with col_titulo:
+    st.markdown("<h1 style='color: navy;'>Consultoria Financeira XYZ</h1>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: gray;'>Planeje hoje. Conquiste amanhã.</h4>", unsafe_allow_html=True)
+
+st.markdown("---")
 
 # Sidebar - Entrada de dados
 st.sidebar.title("Parâmetros")
@@ -48,6 +49,7 @@ for mes in range(1, periodos + 1):
 df = pd.DataFrame(dados)
 
 # Mostrar KPIs
+st.markdown("## Resultados")
 col1, col2, col3 = st.columns(3)
 col1.metric("Valor Final", f"R$ {df['Valor Total'].iloc[-1]:,.2f}")
 col2.metric("Total Aportado", f"R$ {df['Aportes Acumulados'].iloc[-1]:,.2f}")
@@ -64,3 +66,7 @@ st.plotly_chart(fig, use_container_width=True)
 # Tabela detalhada
 st.subheader("Tabela Detalhada")
 st.dataframe(df, use_container_width=True)
+
+# Rodapé
+st.markdown("---")
+st.markdown("<p style='text-align: center;'>© 2025 Consultoria XYZ. Todos os direitos reservados.</p>", unsafe_allow_html=True)
