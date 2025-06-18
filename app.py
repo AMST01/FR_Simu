@@ -13,7 +13,7 @@ st.set_page_config(page_title="Simulador Juros Compostos", layout="wide")
 
 # --- LOGO E TÍTULOS ---
 logo = Image.open("logo.png")
-st.image(logo, width=200)
+st.image(logo, width=100)
 
 st.markdown("<h1 style='text-align: center; color: navy;'>Francamente Ricas</h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center; color: gray;'>Planeje hoje. Conquiste amanhã.</h4>", unsafe_allow_html=True)
