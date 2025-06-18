@@ -74,14 +74,67 @@ with tab3:
     st.subheader("📋 Tabela Detalhada")
     st.dataframe(df, use_container_width=True)
 
-    # 5. Botão para download
+    col_csv, col_pdf, col_xlsx = st.columns(3)
+
+    # CSV
     csv = df.to_csv(index=False).encode('utf-8')
-    st.download_button(
-        label="📥 Baixar resultados (.csv)",
-        data=csv,
-        file_name='simulacao_juros_compostos.csv',
-        mime='text/csv',
-    )
+    with col_csv:
+        st.download_button(
+            label="📥 Baixar CSV",
+            data=csv,
+            file_name='simulacao.csv',
+            mime='text/csv',
+        )
+
+    # Excel (.xlsx)
+    from io import BytesIO
+    import openpyxl
+
+    output_excel = BytesIO()
+    with pd.ExcelWriter(output_excel, engine='openpyxl') as writer:
+        df.to_excel(writer, index=False, sheet_name='Simulacao')
+    output_excel.seek(0)
+
+    with col_xlsx:
+        st.download_button(
+            label="📊 Baixar Excel (.xlsx)",
+            data=output_excel,
+            file_name="simulacao.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
+    # PDF
+    from xhtml2pdf import pisa
+    from io import StringIO
+
+    def df_to_html_table(dataframe):
+        return dataframe.to_html(index=False, border=0)
+
+    def convert_html_to_pdf(html_content):
+        pdf_out = BytesIO()
+        pisa_status = pisa.CreatePDF(StringIO(html_content), dest=pdf_out)
+        if pisa_status.err:
+            return None
+        pdf_out.seek(0)
+        return pdf_out
+
+    html_table = f"""
+    <h2>Simulação de Juros Compostos</h2>
+    {df_to_html_table(df)}
+    """
+
+    pdf_file = convert_html_to_pdf(html_table)
+
+    with col_pdf:
+        if pdf_file:
+            st.download_button(
+                label="📄 Baixar PDF",
+                data=pdf_file,
+                file_name="simulacao.pdf",
+                mime="application/pdf"
+            )
+        else:
+            st.error("Erro ao gerar PDF")
 
 with tab4:
     st.subheader("🧮 Quanto devo investir por mês para alcançar minha meta?")
