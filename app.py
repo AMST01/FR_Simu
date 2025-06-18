@@ -18,7 +18,7 @@ with col_logo:
         st.write("")
 
 with col_titulo:
-    st.markdown("<h1 style='color: navy;'>Consultoria Financeira XYZ</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='color: navy;'>Francamente RICAS</h1>", unsafe_allow_html=True)
     st.markdown("<h4 style='color: gray;'>Planeje hoje. Conquiste amanhã.</h4>", unsafe_allow_html=True)
 
 st.markdown("---")
@@ -69,4 +69,4 @@ st.dataframe(df, use_container_width=True)
 
 # Rodapé
 st.markdown("---")
-st.markdown("<p style='text-align: center;'>© 2025 Consultoria XYZ. Todos os direitos reservados.</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>© 2025 Francamente RICAS. Todos os direitos reservados.</p>", unsafe_allow_html=True)
